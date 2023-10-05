@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-size: 16px;
     background: #E2E8F0;
+    font-family: sans-serif;
   }
       
   *, *:before, *:after {
