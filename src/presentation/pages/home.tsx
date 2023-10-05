@@ -3,6 +3,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid'
 import { Header } from '../components/header'
 import { InputSearch } from '../components/input-search'
 import { Dropdown } from '../components/dropdown/dropdown'
+import { CategoryFilter } from '../components/category-filter'
 
 export const Home = () => {
   return (
@@ -22,6 +23,22 @@ export const Home = () => {
                   options={[
                     { id: 1, label: 'Cosméticos', value: 'Cosméticos' },
                     { id: 2, label: 'Estética', value: 'Estética' },
+                  ]}
+                />
+              </Col>
+            </Row>
+
+            <Row style={{ marginTop: '32px' }}>
+              <Col md={2}>
+                <CategoryFilter
+                  onSelect={() => undefined}
+                  categories={[
+                    'perfume',
+                    'batom',
+                    'creme',
+                    'hidratante',
+                    'esmalte',
+                    'maquiagem',
                   ]}
                 />
               </Col>
