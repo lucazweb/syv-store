@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import searchBg from './search_bg.png'
+
 export const StyledInput = styled.input`
   appearance: none;
   outline: none;
-  min-width: 60%;
+  width: 100%;
   padding: 12px 28px;
   border-radius: 20px;
   background-color: white;
@@ -15,6 +16,7 @@ export const StyledInput = styled.input`
   font-size: 0.8em;
   border: 1px solid #6f42c1;
   transition: border-color ease 0.3s;
+  &:hover,
   &:focus {
     border: 1px solid #86bd2c;
   }

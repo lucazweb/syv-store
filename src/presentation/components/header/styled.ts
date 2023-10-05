@@ -18,5 +18,6 @@ export const Logo = styled.img.attrs({
 
 export const colFlexMiddle: CSSProperties = {
   display: 'flex',
+  justifyContent: 'flex-end',
   alignItems: 'center',
 }
