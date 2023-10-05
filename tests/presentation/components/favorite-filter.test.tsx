@@ -1,10 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
-import {
-  FavoriteFilter,
-  FavoriteFilterProps,
-} from '@/presentation/components/favorite-filter'
+import { render, screen } from '@testing-library/react'
+import { FavoriteFilter } from '@/presentation/components/favorite-filter'
 
 describe('FavoriteFilter component tests', () => {
   test('should render component correctly', () => {
