@@ -63,12 +63,11 @@ describe('CategoryFilter component tests', () => {
     })
 
     expect(screen.getByTestId('category-filter')).toBeTruthy()
-    fireEvent.click(screen.getByText(categories[0]))
-    const classArr = screen
-      .getByText(categories[0])
-      .getAttribute('class')
-      .split(' ')[1]
-      .split('-')
-    expect(classArr.includes('active'))
+    const catButton = screen.getByText(categories[0])
+    fireEvent.click(catButton)
+
+    const classArr = catButton.getAttribute('class').split(' ')
+    console.log(screen.getByText(categories[0]), categories[0], classArr)
+    expect(classArr.includes('active')).toBeTruthy()
   })
 })
