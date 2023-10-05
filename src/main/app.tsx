@@ -1,5 +1,6 @@
 import React from 'react'
+import Router from './router'
 
 export default function App() {
-  return <pre>Synvia</pre>
+  return <Router />
 }
