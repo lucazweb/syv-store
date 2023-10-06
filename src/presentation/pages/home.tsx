@@ -40,11 +40,13 @@ export const Home = () => {
   }
 
   const handleCategoryFilter = (category?: string) => {
-    if (category) {
-      const products = filter.byCategory(category)
-      dispatch(setFiltered(products))
-    } else {
-      dispatch(setFiltered([]))
+    if (!isChecked) {
+      if (category) {
+        const products = filter.byCategory(category)
+        dispatch(setFiltered(products))
+      } else {
+        dispatch(setFiltered([]))
+      }
     }
   }
 
@@ -69,6 +71,7 @@ export const Home = () => {
             <Row between="md">
               <Col md={7}>
                 <InputSearch
+                  disabled={isChecked}
                   onChange={(e) => {
                     handleQueryFilter(e.target.value)
                   }}
@@ -90,8 +93,9 @@ export const Home = () => {
             <Row style={{ marginTop: '32px' }}>
               <Col md={2}>
                 <Row>
-                  <Col md={12}>
+                  <Col md={12} style={{ opacity: isChecked ? '0.5' : '1' }}>
                     <CategoryFilter
+                      isDisabled={isChecked}
                       onSelect={handleCategoryFilter}
                       categories={categories}
                       onRemove={handleCategoryFilter}

@@ -16,6 +16,9 @@ export const StyledInput = styled.input`
   font-size: 0.8em;
   border: 1px solid #6f42c1;
   transition: border-color ease 0.3s;
+  &:disabled {
+    opacity: 0.5;
+  }
   &:hover,
   &:focus {
     border: 1px solid #86bd2c;

@@ -10,23 +10,27 @@ export type CategoryFilterProps = {
   categories: string[]
   onSelect: (category: string) => void
   onRemove: () => void
+  isDisabled?: boolean
 }
 
 export const CategoryFilter = ({
   categories,
   onSelect,
   onRemove,
+  isDisabled,
 }: CategoryFilterProps) => {
   const [selected, setSelected] = useState<string | undefined>()
 
   const handleSelection = (category: string) => {
-    if (selected === category) {
-      setSelected(undefined)
-      onRemove()
-      return
+    if (!isDisabled) {
+      if (selected === category) {
+        setSelected(undefined)
+        onRemove()
+        return
+      }
+      setSelected(category)
+      onSelect(category)
     }
-    setSelected(category)
-    onSelect(category)
   }
 
   return (
