@@ -1,13 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import { Header } from '../components/header'
-import { InputSearch } from '../components/input-search'
-import { Dropdown } from '../components/dropdown/dropdown'
-import { CategoryFilter } from '../components/category-filter'
-import { FavoriteFilter } from '../components/favorite-filter'
+import { Product } from '@/domain/models/product'
+import {
+  Header,
+  InputSearch,
+  Dropdown,
+  CategoryFilter,
+  FavoriteFilter,
+  ProductItem,
+} from '@/presentation/components'
+
+import { ProductsWrapper } from './styled'
 
 export const Home = () => {
   const [isChecked, setIsChecked] = useState(false)
+  const [products, setProducts] = useState<Product[]>([])
+
+  useEffect(() => {
+    const handleRequest = () => {
+      try {
+        void fetch('https://makeup-api.herokuapp.com/api/v1/products.json')
+          .then(async (res) => {
+            return await res.json()
+          })
+          .then((data) => {
+            console.log(data)
+            setProducts(data)
+          })
+      } catch (err) {}
+    }
+    handleRequest()
+  })
 
   return (
     <>
@@ -37,14 +60,7 @@ export const Home = () => {
                   <Col md={12}>
                     <CategoryFilter
                       onSelect={() => undefined}
-                      categories={[
-                        'perfume',
-                        'batom',
-                        'creme',
-                        'hidratante',
-                        'esmalte',
-                        'maquiagem',
-                      ]}
+                      categories={categories}
                     />
                   </Col>
                   <Col md={12} style={{ marginTop: '24px' }}>
@@ -57,6 +73,19 @@ export const Home = () => {
                   </Col>
                 </Row>
               </Col>
+              <Col md={8}>
+                <ProductsWrapper>
+                  {products.map((product) => (
+                    <ProductItem
+                      key={product.id}
+                      onClick={(product) => {
+                        console.log(product)
+                      }}
+                      product={product}
+                    />
+                  ))}
+                </ProductsWrapper>
+              </Col>
             </Row>
           </Col>
         </Row>
@@ -64,3 +93,20 @@ export const Home = () => {
     </>
   )
 }
+
+export const categories = [
+  'pencil',
+  'lipstick',
+  'liquid',
+  'powder',
+  'lip_gloss',
+  'gel',
+  'cream',
+  'palette',
+  'concealer',
+  'highlighter',
+  'bb_cc',
+  'contour',
+  'lip_stain',
+  'mineral',
+]
