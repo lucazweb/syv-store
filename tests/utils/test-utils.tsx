@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { render, RenderOptions } from '@testing-library/react'
+import { faker } from '@faker-js/faker'
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return <BrowserRouter>{children}</BrowserRouter>
@@ -46,6 +47,43 @@ export const makeProduct = () => {
       },
     ],
   }
+}
+
+export const makeProductList = (length: number) => {
+  const arr = []
+  for (let i = 0; i < length; i++) {
+    arr.push({
+      id: 1048,
+      brand: faker.random.word(),
+      name: faker.commerce.product(),
+      price: faker.random.numeric(),
+      price_sign: '$',
+      currency: 'CAD',
+      image_link: faker.internet.url(),
+      product_link: faker.internet.url(),
+      website_link: faker.internet.url(),
+      description: faker.lorem.sentence(),
+      rating: null,
+      category: faker.random.word(),
+      product_type: faker.random.word(),
+      tag_list: ['cruelty free', 'Vegan'],
+      created_at: faker.random.word(),
+      updated_at: faker.random.word(),
+      product_api_url: faker.internet.url(),
+      api_featured_image: faker.internet.url(),
+      product_colors: [
+        {
+          hex_value: '#B28378',
+          colour_name: 'BFF Pencil',
+        },
+        {
+          hex_value: '#A36B5E',
+          colour_name: '951 Pencil',
+        },
+      ],
+    })
+  }
+  return arr
 }
 
 export { customRender as render }
