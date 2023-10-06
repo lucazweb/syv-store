@@ -70,7 +70,6 @@ describe('CategoryFilter component tests', () => {
     fireEvent.click(catButton)
 
     const classArr = catButton.getAttribute('class').split(' ')
-    console.log(screen.getByText(categories[0]), categories[0], classArr)
     expect(classArr.includes('active')).toBeTruthy()
   })
 })
