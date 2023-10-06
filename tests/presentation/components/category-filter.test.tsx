@@ -21,6 +21,7 @@ describe('CategoryFilter component tests', () => {
     ]
     makeSut({
       onSelect: jest.fn(),
+      onRemove: jest.fn(),
       categories,
     })
 
@@ -42,6 +43,7 @@ describe('CategoryFilter component tests', () => {
 
     makeSut({
       onSelect: mockOnSelect,
+      onRemove: jest.fn(),
       categories,
     })
 
@@ -59,6 +61,7 @@ describe('CategoryFilter component tests', () => {
 
     makeSut({
       onSelect: mockOnSelect,
+      onRemove: jest.fn(),
       categories,
     })
 
