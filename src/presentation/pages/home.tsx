@@ -15,7 +15,8 @@ import { RootState } from '@/infra/redux/store'
 import { fetchProducts } from '@/infra/redux/features/products/thunks'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { Filter } from '@/data/usecases/filter'
-import { setFiltered } from '@/infra/redux/features/products/slice'
+import { setFiltered, setProducts } from '@/infra/redux/features/products/slice'
+import { orderByProperty } from '../components/dropdown/order-by-property'
 
 export const Home = () => {
   const [isChecked, setIsChecked] = useState(false)
@@ -80,11 +81,17 @@ export const Home = () => {
               </Col>
               <Col md={5}>
                 <Dropdown
-                  onChange={(option) => {}}
+                  onChange={(option) => {
+                    const products = orderByProperty(
+                      option.value as string,
+                      list
+                    )
+                    dispatch(setProducts(products))
+                  }}
                   placeholder="Selecione a ordem"
                   options={[
-                    { id: 1, label: 'Cosméticos', value: 'Cosméticos' },
-                    { id: 2, label: 'Estética', value: 'Estética' },
+                    { id: 1, label: 'Preço', value: 'price' },
+                    { id: 2, label: 'Nome', value: 'name' },
                   ]}
                 />
               </Col>
@@ -111,15 +118,13 @@ export const Home = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col md={8}>
+              <Col md={10} className="custom-scroll">
                 <ProductsWrapper>
                   {(filtered.length ? filtered : undefined || list).map(
                     (product) => (
                       <ProductItem
                         key={product.id}
-                        onClick={(product) => {
-                          console.log(product)
-                        }}
+                        onClick={(product) => {}}
                         product={product}
                       />
                     )

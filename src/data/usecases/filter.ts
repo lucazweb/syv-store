@@ -13,7 +13,7 @@ export class Filter implements FilterProducts {
   byContent(query: string) {
     return this.products.filter((product) => {
       const regex = new RegExp(query.toLowerCase())
-      // number, name, category, price
+
       if (
         (product.name && regex.test(product.name.toLowerCase())) ||
         (product.category && regex.test(product.category.toLowerCase())) ||

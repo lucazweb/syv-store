@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
+ 
+
   html {  
     box-sizing: border-box;
     font-size: 16px;
@@ -16,6 +18,27 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-weight: normal;
+  }
+
+  .custom-scroll {
+    overflow-y: scroll;
+    height: 100vh;
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  .custom-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #6F42C1;
+    outline: 0px solid slategrey;
+    border-radius: 10px;
   }
       
   ol,ul {
