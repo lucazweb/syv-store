@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid'
+import { useSelector } from 'react-redux'
 import { Product } from '@/domain/models/product'
 import {
   Header,
@@ -11,26 +12,33 @@ import {
 } from '@/presentation/components'
 
 import { ProductsWrapper } from './styled'
+import { RootState } from '@/infra/redux/store'
 
 export const Home = () => {
   const [isChecked, setIsChecked] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
 
-  useEffect(() => {
-    const handleRequest = () => {
-      try {
-        void fetch('https://makeup-api.herokuapp.com/api/v1/products.json')
-          .then(async (res) => {
-            return await res.json()
-          })
-          .then((data) => {
-            console.log(data)
-            setProducts(data)
-          })
-      } catch (err) {}
-    }
-    handleRequest()
-  })
+  const { isLoading, list } = useSelector(
+    ({ productsSlice }: RootState) => productsSlice
+  )
+
+  console.log(list)
+
+  // useEffect(() => {
+  //   const handleRequest = () => {
+  //     try {
+  //       void fetch('https://makeup-api.herokuapp.com/api/v1/products.json')
+  //         .then(async (res) => {
+  //           return await res.json()
+  //         })
+  //         .then((data) => {
+  //           console.log(data)
+  //           setProducts(data)
+  //         })
+  //     } catch (err) {}
+  //   }
+  //   handleRequest()
+  // })
 
   return (
     <>
@@ -75,7 +83,7 @@ export const Home = () => {
               </Col>
               <Col md={8}>
                 <ProductsWrapper>
-                  {products.map((product) => (
+                  {list.map((product) => (
                     <ProductItem
                       key={product.id}
                       onClick={(product) => {
