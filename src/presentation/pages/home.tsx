@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Product } from '@/domain/models/product'
 import {
   Header,
@@ -13,32 +13,24 @@ import {
 
 import { ProductsWrapper } from './styled'
 import { RootState } from '@/infra/redux/store'
+import { fetchProducts } from '@/infra/redux/features/products/thunks'
+import { useAppDispatch } from '../hooks/useAppDispatch'
 
 export const Home = () => {
   const [isChecked, setIsChecked] = useState(false)
-  const [products, setProducts] = useState<Product[]>([])
 
-  const { isLoading, list } = useSelector(
-    ({ productsSlice }: RootState) => productsSlice
-  )
+  const { list } = useSelector(({ productsSlice }: RootState) => productsSlice)
+
+  const dispatch = useAppDispatch()
 
   console.log(list)
 
-  // useEffect(() => {
-  //   const handleRequest = () => {
-  //     try {
-  //       void fetch('https://makeup-api.herokuapp.com/api/v1/products.json')
-  //         .then(async (res) => {
-  //           return await res.json()
-  //         })
-  //         .then((data) => {
-  //           console.log(data)
-  //           setProducts(data)
-  //         })
-  //     } catch (err) {}
-  //   }
-  //   handleRequest()
-  // })
+  useEffect(() => {
+    const handleFetchProducts = async () => {
+      await dispatch(fetchProducts())
+    }
+    void handleFetchProducts()
+  }, [])
 
   return (
     <>
