@@ -48,6 +48,18 @@ export const Home = () => {
     }
   }
 
+  useEffect(() => {
+    if (isChecked) {
+      const favorites = localStorage.getItem('synvia-store')
+      if (favorites) {
+        const products = filter.byFavorite(JSON.parse(favorites))
+        dispatch(setFiltered(products))
+      }
+    } else {
+      dispatch(setFiltered([]))
+    }
+  }, [isChecked])
+
   return (
     <>
       <Header />
