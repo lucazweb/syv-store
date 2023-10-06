@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { CSSProperties } from 'styled-components'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -8,6 +8,24 @@ export const Wrapper = styled.div`
   gap: 18px;
   img {
     width: 100%;
+  }
+
+  .always-visble {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  svg {
+    transition: opacity ease 0.5s;
+    display: none;
+    opacity: 0;
+  }
+
+  &:hover {
+    svg {
+      display: block;
+      opacity: 1;
+    }
   }
 `
 export const FlexWrapper = styled.div`
@@ -49,3 +67,11 @@ export const ProductCategory = styled.div`
   height: 30px;
   border-radius: 4px;
 `
+
+export const favoriteStyles: CSSProperties = {
+  position: 'absolute',
+  top: '5px',
+  right: '5px',
+  zIndex: 900,
+  cursor: 'pointer',
+}
