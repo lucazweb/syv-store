@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import caretDown from './caret-down-solid.svg'
 
 export const FlexWrapper = styled.div`
   display: flex;
@@ -57,13 +58,17 @@ export const DropdownWrapper = styled.div`
 
 export const DropdownButton = styled.div`
   cursor: pointer;
-  background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
   text-indent: 8px;
-  background: white;
+  background-color: white;
+  background-image: url(${caretDown});
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: 48%;
+  background-size: 8px;
   border-radius: 20px;
   color: #6f42c1;
   font-size: 0.9em;

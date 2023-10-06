@@ -2,7 +2,7 @@ import styled, { CSSProperties } from 'styled-components'
 import synvia from './synvia_black.svg'
 
 export const HeaderWrapper = styled.div`
-  width: 100vw;
+  box-sizing: border-box;
   height: 90px;
   display: flex;
   border-bottom: 1px solid #ccc;

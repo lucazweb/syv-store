@@ -10,18 +10,19 @@ import {
   ProductItem,
 } from '@/presentation/components'
 
-import { ProductsWrapper } from './styled'
+import { LoaderWrapper, ProductsWrapper } from './styled'
 import { RootState } from '@/infra/redux/store'
 import { fetchProducts } from '@/infra/redux/features/products/thunks'
 import { useAppDispatch } from '../hooks/useAppDispatch'
 import { Filter } from '@/data/usecases/filter'
 import { setFiltered, setProducts } from '@/infra/redux/features/products/slice'
 import { orderByProperty } from '../components/dropdown/order-by-property'
+import { StyledLoader } from '../components/loader/styled'
 
 export const Home = () => {
   const [isChecked, setIsChecked] = useState(false)
 
-  const { list, filtered } = useSelector(
+  const { list, filtered, isLoading } = useSelector(
     ({ productsSlice }: RootState) => productsSlice
   )
 
@@ -120,13 +121,19 @@ export const Home = () => {
               </Col>
               <Col md={10} className="custom-scroll">
                 <ProductsWrapper>
-                  {(filtered.length ? filtered : undefined || list).map(
-                    (product) => (
-                      <ProductItem
-                        key={product.id}
-                        onClick={(product) => {}}
-                        product={product}
-                      />
+                  {isLoading ? (
+                    <LoaderWrapper>
+                      <StyledLoader />
+                    </LoaderWrapper>
+                  ) : (
+                    (filtered.length ? filtered : undefined || list).map(
+                      (product) => (
+                        <ProductItem
+                          key={product.id}
+                          onClick={(product) => {}}
+                          product={product}
+                        />
+                      )
                     )
                   )}
                 </ProductsWrapper>

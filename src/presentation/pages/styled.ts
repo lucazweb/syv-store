@@ -6,3 +6,8 @@ export const ProductsWrapper = styled.div`
   flex-wrap: wrap;
   width: 80%;
 `
+export const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`

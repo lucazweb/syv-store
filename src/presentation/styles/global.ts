@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .custom-scroll {
     overflow-y: scroll;
-    height: 100vh;
+    height: 75vh;
   }
 
   .custom-scroll::-webkit-scrollbar {
