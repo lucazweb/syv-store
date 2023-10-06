@@ -9,17 +9,20 @@ import {
 export type CategoryFilterProps = {
   categories: string[]
   onSelect: (category: string) => void
+  onRemove: () => void
 }
 
 export const CategoryFilter = ({
   categories,
   onSelect,
+  onRemove,
 }: CategoryFilterProps) => {
   const [selected, setSelected] = useState<string | undefined>()
 
   const handleSelection = (category: string) => {
     if (selected === category) {
       setSelected(undefined)
+      onRemove()
       return
     }
     setSelected(category)

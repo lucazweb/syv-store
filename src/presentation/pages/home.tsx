@@ -25,8 +25,7 @@ export const Home = () => {
   )
 
   const dispatch = useAppDispatch()
-
-  console.log(list)
+  const filter = new Filter(list)
 
   useEffect(() => {
     const handleFetchProducts = async () => {
@@ -36,9 +35,17 @@ export const Home = () => {
   }, [])
 
   const handleQueryFilter = (query: string) => {
-    const filter = new Filter(list)
     const products = filter.byContent(query)
     dispatch(setFiltered(products))
+  }
+
+  const handleCategoryFilter = (category?: string) => {
+    if (category) {
+      const products = filter.byCategory(category)
+      dispatch(setFiltered(products))
+    } else {
+      dispatch(setFiltered([]))
+    }
   }
 
   return (
@@ -73,8 +80,9 @@ export const Home = () => {
                 <Row>
                   <Col md={12}>
                     <CategoryFilter
-                      onSelect={() => undefined}
+                      onSelect={handleCategoryFilter}
                       categories={categories}
+                      onRemove={handleCategoryFilter}
                     />
                   </Col>
                   <Col md={12} style={{ marginTop: '24px' }}>
