@@ -1,6 +1,5 @@
 import { FavoritesStorage } from '@/data/usecases/favorites-storage'
 import { mockLocalStorage } from '@/tests/data/mocks/mock-local-storage'
-import { faker } from '@faker-js/faker'
 
 mockLocalStorage()
 
