@@ -12,9 +12,20 @@ export const InputSearch = (props: InputSearchProps) => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regex = /[^\w\s]/gi
     if (regex.test(e.target.value)) {
-      setValue(e.target.value.replace(/[^\w\s]/gi, ''))
+      const val = e.target.value.replace(/[^\w\s]/gi, '')
+      setValue(val)
+      if (props.onChange) {
+        props.onChange({
+          ...e,
+          target: {
+            ...e.target,
+            value: e.target.value.replace(/[^\w\s]/gi, ''),
+          },
+        })
+      }
     } else {
       setValue(e.target.value)
+      if (props.onChange) props.onChange(e)
     }
   }
 

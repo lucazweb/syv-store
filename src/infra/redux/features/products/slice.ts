@@ -5,10 +5,12 @@ import { fetchProducts } from './thunks'
 export type ProductsState = {
   isLoading: boolean
   list: Product[]
+  filtered: Product[]
 }
 
 const initialState: ProductsState = {
   list: [],
+  filtered: [],
   isLoading: false,
 }
 
@@ -21,6 +23,9 @@ export const productsSlice = createSlice({
     },
     setProducts: (state, action: PayloadAction<Product[]>) => {
       return { ...state, list: action.payload }
+    },
+    setFiltered: (state, action: PayloadAction<Product[]>) => {
+      return { ...state, filtered: action.payload }
     },
   },
   extraReducers: (builder) => {
@@ -35,5 +40,5 @@ export const productsSlice = createSlice({
 })
 
 export const { reducer, actions } = productsSlice
-export const { setIsLoading, setProducts } = actions
+export const { setIsLoading, setProducts, setFiltered } = actions
 export default reducer

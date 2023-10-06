@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Row, Col } from 'react-flexbox-grid'
-import { useSelector, useDispatch } from 'react-redux'
-import { Product } from '@/domain/models/product'
+import { useSelector } from 'react-redux'
 import {
   Header,
   InputSearch,
@@ -15,11 +14,15 @@ import { ProductsWrapper } from './styled'
 import { RootState } from '@/infra/redux/store'
 import { fetchProducts } from '@/infra/redux/features/products/thunks'
 import { useAppDispatch } from '../hooks/useAppDispatch'
+import { Filter } from '@/data/usecases/filter'
+import { setFiltered } from '@/infra/redux/features/products/slice'
 
 export const Home = () => {
   const [isChecked, setIsChecked] = useState(false)
 
-  const { list } = useSelector(({ productsSlice }: RootState) => productsSlice)
+  const { list, filtered } = useSelector(
+    ({ productsSlice }: RootState) => productsSlice
+  )
 
   const dispatch = useAppDispatch()
 
@@ -32,6 +35,12 @@ export const Home = () => {
     void handleFetchProducts()
   }, [])
 
+  const handleQueryFilter = (query: string) => {
+    const filter = new Filter(list)
+    const products = filter.byContent(query)
+    dispatch(setFiltered(products))
+  }
+
   return (
     <>
       <Header />
@@ -40,7 +49,12 @@ export const Home = () => {
           <Col md={12}>
             <Row between="md">
               <Col md={7}>
-                <InputSearch placeholder="Pesquisar por nome ou número" />
+                <InputSearch
+                  onChange={(e) => {
+                    handleQueryFilter(e.target.value)
+                  }}
+                  placeholder="Pesquisar por nome ou número"
+                />
               </Col>
               <Col md={5}>
                 <Dropdown
@@ -75,15 +89,17 @@ export const Home = () => {
               </Col>
               <Col md={8}>
                 <ProductsWrapper>
-                  {list.map((product) => (
-                    <ProductItem
-                      key={product.id}
-                      onClick={(product) => {
-                        console.log(product)
-                      }}
-                      product={product}
-                    />
-                  ))}
+                  {(filtered.length ? filtered : undefined || list).map(
+                    (product) => (
+                      <ProductItem
+                        key={product.id}
+                        onClick={(product) => {
+                          console.log(product)
+                        }}
+                        product={product}
+                      />
+                    )
+                  )}
                 </ProductsWrapper>
               </Col>
             </Row>
