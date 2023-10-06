@@ -12,12 +12,12 @@ export class Filter implements FilterProducts {
 
   byContent(query: string) {
     return this.products.filter((product) => {
-      const regex = new RegExp(query)
+      const regex = new RegExp(query.toLowerCase())
       // number, name, category, price
       if (
-        regex.test(product.name) ||
-        regex.test(product.category) ||
-        regex.test(product.price)
+        (product.name && regex.test(product.name.toLowerCase())) ||
+        (product.category && regex.test(product.category.toLowerCase())) ||
+        (product.price && regex.test(product.price))
       ) {
         return true
       }
